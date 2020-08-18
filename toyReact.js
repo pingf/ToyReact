@@ -53,12 +53,19 @@ export function createElement(type, attributes, ...children){
   }
 
 
-  for (let child of children){
-    if (typeof child === 'string') {
-       child = new TextWrapper(child);
-    }
-    e.appendChild(child);
+  let insertChildren = (children) => {
+      for (let child of children) {
+        if (typeof child === 'string') {
+            child = new TextWrapper(child);
+        }
+        if ((typeof child === "object") && (child instanceof Array)) {
+            insertChildren(child)
+        } else {
+            e.appendChild(child);
+        }
+      }
   }
+  insertChildren(children);
   return e;
 }
 
