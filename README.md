@@ -149,10 +149,10 @@ main.html
 
 
 ```js
-document.body.appendChild( <div id="a" class="c">
+document.body.appendChild(<MyComponent id="a" class="c">
     <div>1</div>
     <div>2</div>
     <div>3</div>
-</div>)
+</MyComponent>)
 ```
 
