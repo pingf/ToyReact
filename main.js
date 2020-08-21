@@ -1,8 +1,16 @@
 import {createElement, render, Component} from './toyReact.js'
 class MyComponent extends Component{
+    constructor(){
+        super();
+        this.state = {
+            a: 1,
+            b: 2
+        }
+    }
     render(){
         return <div>
                 <h1>my component</h1>
+                <span>{this.state.a.toString()}</span>
                 {this.children}
             </div>
     }
@@ -10,7 +18,7 @@ class MyComponent extends Component{
 }
 
 render(<MyComponent id="a" class="c">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+        <div>a</div>
+        <div>b</div>
+        <div>c</div>
        </MyComponent>, document.body)
