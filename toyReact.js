@@ -6,6 +6,11 @@ class ElementWrapper {
 
     }
     setAttribute(name, value){
+        if(name.match(/^on([\s\S]+)$/)) {
+            this.root.addEventListener(RegExp.$1.replace(/^[\s\S]/, c=>c.toLowerCase()), value);
+        } else {
+            this.root.setAttribute(name, value);
+        }
         this.root.setAttribute(name, value);
 
     }
@@ -36,6 +41,7 @@ export class Component{
     constructor(){
         this.props = Object.create(null);
         this.children = [];
+        this._range = null;
     }
     setAttribute(name, value){
         this.props[name] = value;
@@ -44,7 +50,13 @@ export class Component{
     appendChild(component){
         this.children.push(component);
     }
+    rerender(){
+        console.log('hahaha')
+        this._range.deleteContents();
+        this.render()[RENDER_TO_DOM](this._range);
+    }
     [RENDER_TO_DOM](range){
+        this._range = range;
         this.render()[RENDER_TO_DOM](range);
     }
 }
