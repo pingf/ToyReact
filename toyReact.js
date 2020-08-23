@@ -41,6 +41,7 @@ export class Component{
     constructor(){
         this.props = Object.create(null);
         this.children = [];
+        this._root = null;
         this._range = null;
     }
     setAttribute(name, value){
@@ -56,7 +57,7 @@ export class Component{
     }
     rerender(){
         this._range.deleteContents();
-        this.render()[RENDER_TO_DOM](this._range);
+        this[RENDER_TO_DOM](this._range);
     }
     setState(newState){
         if (this.state === null || typeof this.state !== "object") {
